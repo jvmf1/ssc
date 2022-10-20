@@ -17,13 +17,13 @@ if args.rgb:
 
     size = math.sqrt(len(orig_arr)/3)
 
-    dim = (math.ceil(size),math.ceil((len(orig_arr)/3)/(size)),3)
+    dim = (math.ceil(size),math.ceil((len(orig_arr)/3)/math.ceil(size)),3)
 
 else:
 
     size = math.sqrt(len(orig_arr))
 
-    dim = (math.ceil(size), math.ceil(len(orig_arr)/size))
+    dim = (math.ceil(size), math.ceil(len(orig_arr)/math.ceil(size)))
 
 if np.prod(dim) > len(orig_arr) != 0:
 
@@ -34,6 +34,8 @@ else:
     arr = orig_arr
 
 arr = np.array(arr).reshape(dim).astype(np.uint8)
+
+print(arr.shape)
 
 if np.prod(arr.shape) != len(orig_arr):
     print(f"Padding {np.prod(arr.shape)-len(orig_arr)} bytes")
