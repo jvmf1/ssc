@@ -11,8 +11,10 @@ static void xor(const unsigned char *a, const unsigned char *b, const size_t len
 }
 
 static void shuffle(unsigned char *a, const size_t len, int nonce) {
-	for (size_t i = 0; i < len; i++)
-		a[i] += ((i*137)/len) ^ (a[(i*87)%len]^nonce);
+	for (size_t i = 0; i < len; i++) {
+		unsigned char tmp = a[(i*87)%len];
+		a[i] += 1 + ((tmp >> 5) + a[tmp%len]) + ((nonce + tmp) >> 3) * i;
+	}
 }
 
 void ssc_cipher(const unsigned char *data, const size_t len, const unsigned char *key, const size_t key_len, const int nonce, unsigned char *out) {
