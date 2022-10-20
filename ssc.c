@@ -11,7 +11,7 @@ static void xor(const unsigned char *a, const unsigned char *b, const size_t len
 
 static void shuffle(unsigned char *a, const size_t len, int nonce) {
 	for (size_t i = 0; i < len; i++) {
-		a[i] = (a[i] << 3) + (i*137/len) + (a[(i*87+3)%len]*27 ^ nonce);
+		a[i] += (i^nonce) ^ (a[(i*87)%len]);
 	}
 }
 
