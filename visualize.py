@@ -15,17 +15,17 @@ orig_arr = bytearray(sys.stdin.buffer.read())
 
 if args.rgb:
 
-    size = math.ceil(math.sqrt(len(orig_arr)/3))
+    size = math.sqrt(len(orig_arr)/3)
 
-    dim = (size,size,3)
+    dim = (math.ceil(size),math.ceil((len(orig_arr)/3)/(size)),3)
 
 else:
 
-    size = math.ceil(math.sqrt(len(orig_arr)))
+    size = math.sqrt(len(orig_arr))
 
-    dim = (size, size)
+    dim = (math.ceil(size), math.ceil(len(orig_arr)/size))
 
-if np.prod(dim) > len(orig_arr):
+if np.prod(dim) > len(orig_arr) != 0:
 
     arr = np.append(orig_arr, np.zeros(np.prod(dim) - len(orig_arr)))
 
@@ -36,7 +36,7 @@ else:
 arr = np.array(arr).reshape(dim).astype(np.uint8)
 
 if np.prod(arr.shape) != len(orig_arr):
-    print(f"Padding {len(orig_arr)-len(arr)} bytes")
+    print(f"Padding {np.prod(arr.shape)-len(orig_arr)} bytes")
 
 cv2.namedWindow("a", cv2.WINDOW_KEEPRATIO)
 cv2.imshow("a", arr)
