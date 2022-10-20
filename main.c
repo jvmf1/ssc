@@ -24,7 +24,7 @@ int main(int argc, char **argv) {
 
 	unsigned char key[] = {'a'};
 
-	unsigned char text[20];
+	unsigned char text[5*5];
 
 	memset(text, 0xAA, sizeof(text));
 
