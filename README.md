@@ -8,7 +8,7 @@ char data[] = "1234567890";
 char enc[sizeof(data)];
 char dec[sizeof(data)];
 
-int nonce = 123;
+size_t nonce = 123;
 
 ssc_cipher(data, sizeof(data)-1, key, sizeof(key)-1, nonce, enc);
 
